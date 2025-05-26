@@ -1,0 +1,136 @@
+<!--version 0.6-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySync '95</title>
+    <!-- Link to the main CSS file -->
+    <link rel="stylesheet" href="/css/styles/studysync.css">
+</head>
+<body>
+
+    <!-- Window for In-App Notifications/Reminders -->
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">StudySync '95 - Upcoming Reminders</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <p>Tasks due within the next 7 days:</p>
+            <div class="reminder-list">
+                <% if (upcomingTasks.length > 0) { %>
+                    <% upcomingTasks.forEach(task => { %>
+                        <div class="reminder-item">
+                            <h4><%= task.name %></h4>
+                            <p><strong>Subject:</strong> <%= task.subject %></p>
+                            <p><strong>Due:</strong> <%= task.deadline %></p>
+                            <% if (task.description) { %>
+                                <p><%= task.description %></p>
+                            <% } %>
+                            <!-- Add completion checkbox -->
+                            <form action="/tasks/complete/<%= task.id %>" method="POST" class="complete-task-form">
+                                <div class="field-row">
+                                    <input type="checkbox" id="complete-<%= task.id %>" name="completed" <%= task.completed ? 'checked' : '' %>>
+                                    <label for="complete-<%= task.id %>">Completed</label>
+                                </div>
+                            </form>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p>No tasks due soon. Stay on top of your studies!</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Window for displaying all tasks -->
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">StudySync '95 - All Tasks</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <p>Here are all your study tasks:</p>
+            <div class="task-list">
+                <% if (tasks.length > 0) { %>
+                    <% tasks.forEach(task => { %>
+                        <div class="task-item">
+                            <h4><%= task.name %></h4>
+                            <p><strong>Subject:</strong> <%= task.subject %></p>
+                            <p><strong>Deadline:</strong> <%= task.deadline %></p>
+                            <% if (task.description) { %>
+                                <p><%= task.description %></p>
+                            <% } %>
+                            <!-- Add completion checkbox -->
+                            <form action="/tasks/complete/<%= task.id %>" method="POST" class="complete-task-form">
+                                <div class="field-row">
+                                    <input type="checkbox" id="complete-<%= task.id %>" name="completed" <%= task.completed ? 'checked' : '' %>>
+                                    <label for="complete-<%= task.id %>">Completed</label>
+                                </div>
+                            </form>
+                            <!-- NOTE: Add buttons/links for Edit, Delete here later -->
+                            <!-- Example: <button>Edit</button> <button>Delete</button> -->
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p>No tasks added yet! Use the form below to add your first task.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Window for adding a new task -->
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">Add New Task</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <!-- Form to submit new task data to the /tasks route -->
+            <form action="/tasks" method="POST">
+                <div class="field-row-stacked">
+                    <label for="name">Task Name:</label>
+                    <input id="name" type="text" name="name" required>
+                </div>
+                 <div class="field-row-stacked">
+                    <label for="subject">Subject:</label>
+                    <input id="subject" type="text" name="subject" required>
+                </div>
+                 <div class="field-row-stacked">
+                    <label for="deadline">Deadline:</label>
+                    <!-- Use type="date" for a date picker -->
+                    <input id="deadline" type="date" name="deadline" required>
+                </div>
+                <div class="field-row-stacked">
+                    <label for="description">Description (Optional):</label>
+                    <textarea id="description" name="description" rows="4"></textarea>
+                </div>
+                <div class="field-row" style="justify-content: flex-end">
+                    <!-- Button to submit the form -->
+                    <button type="submit">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Link to client-side JavaScript file -->
+    <script src="/js/script.js"></script>
+
+</body>
+</html>
+<!--@vstechno-official-->

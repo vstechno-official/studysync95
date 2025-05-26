@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbit&family=WDXL+Lubrifont+TC&display=swap');
+
+/* --- CSS Variables (design v.0.5) --- */
+:root {
+    --color-bg: #1a1a2e;          /* Dark background */
+    --color-primary: #16213e;     /* Darker primary color */
+    --color-secondary: #0f3460;   /* Accent blue */
+    --color-accent: #e94560;      /* Accent red/pink */
+    --color-text: #e0e0e0;        /* Light gray text */
+    --color-border: #533483;      /* Purple border */
+    --color-highlight: #e94560;   /* Highlight color */
+    --color-success: #4CAF50;     /* Green for success/completed */
+  
+    /* Font Family - Monospace */
+    --font-family: 'Orbit', monospace; /* Retro-inspired fonts */
+    --font-family-alt: 'Orbit', monospace; /* Alternative font for headings */
+  
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+  
+    /* Border Styles */
+    --border-style: 2px solid var(--color-border);
+    --border-style-thick: 4px double var(--color-border); /* Double border for emphasis */
+  
+    /* Box Shadow (Subtle glow/outline) */
+    --box-shadow-glow: 0 0 5px var(--color-accent);
+  }
+  
+  /* --- Base Styles --- */
+  body {
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    padding: var(--spacing-md);
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-accent); /* Accent color for headings */
+  }
+  
+  p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  button,
+  input[type="submit"],
+  input[type="reset"] {
+    font-family: var(--font-family);
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    border: var(--border-style);
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover {
+    background-color: var(--color-highlight);
+    box-shadow: var(--box-shadow-glow);
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  textarea {
+    font-family: var(--font-family);
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border: var(--border-style);
+    padding: var(--spacing-sm);
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+  
+  label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-accent); /* Accent color for labels */
+  }
+  
+  /* --- Layout Styles (Simplified) --- */
+  .container {
+    max-width: 900px; /* Slightly wider container */
+    margin: 0 auto;
+    padding: var(--spacing-md);
+  }
+  
+  .window {
+    background-color: var(--color-primary);
+    border: var(--border-style-thick); /* Use double border for windows */
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md); /* Padding inside the window */
+  }
+  
+  .title-bar {
+    background-color: var(--color-secondary);
+    border-bottom: var(--border-style);
+    padding: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) var(--spacing-md) calc(-1 * var(--spacing-md)); /* Negative margin to extend to window edges */
+  }
+  
+  .title-bar-text {
+    font-weight: bold;
+    color: var(--color-text);
+  }
+  
+  .title-bar-controls button {
+      background-color: var(--color-accent); /* Accent color for controls */
+      border: none; /* No border on control buttons */
+      padding: var(--spacing-xs) var(--spacing-sm);
+      margin-left: var(--spacing-xs);
+      color: var(--color-text);
+  }
+  
+  .title-bar-controls button:hover {
+      background-color: var(--color-highlight);
+      box-shadow: var(--box-shadow-glow);
+  }
+  
+  
+  .window-body {
+    /* Padding is handled by the .window class */
+  }
+  
+  .field-row-stacked {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  /* Style for the checkbox row */
+  .field-row {
+      display: flex;
+      align-items: center;
+      margin-top: var(--spacing-sm);
+  }
+  
+  .field-row input[type="checkbox"] {
+      margin-right: var(--spacing-sm);
+      appearance: none; /* Remove default browser styling */
+      width: 18px; /* Slightly larger checkbox */
+      height: 18px;
+      border: var(--border-style);
+      background-color: var(--color-secondary);
+      cursor: pointer;
+      position: relative;
+      display: inline-block; /* Ensure it respects width/height */
+      flex-shrink: 0; /* Prevent shrinking in flex container */
+  }
+  
+  .field-row input[type="checkbox"]:checked {
+      background-color: var(--color-success); /* Green when checked */
+      border-color: var(--color-success);
+  }
+  
+  .field-row input[type="checkbox"]:checked::after {
+      content: '✓'; /* Simple checkmark */
+      color: var(--color-text); /* White checkmark */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px; /* Slightly larger checkmark */
+      font-weight: bold;
+  }
+  
+  .field-row label {
+      margin-bottom: 0;
+      cursor: pointer;
+      color: var(--color-text); /* Text color for checkbox label */
+  }
+  
+  
+  /* --- Component Styles --- */
+  .task-list, .reminder-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .task-item, .reminder-item {
+    background-color: var(--color-secondary); /* Use secondary color for items */
+    border: var(--border-style);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    word-break: break-word; /* Prevent long words from overflowing */
+  }
+  
+  .reminder-item {
+    border-color: var(--color-accent); /* Accent color border for reminders */
+    box-shadow: var(--box-shadow-glow); /* Glow effect for reminders */
+  }
+  
+  /* Style for completed tasks */
+  .task-item.completed, .reminder-item.completed {
+      text-decoration: line-through;
+      opacity: 0.7;
+      border-color: var(--color-success); /* Green border for completed */
+  }
+  
+  
+  /* --- Utility Styles (Minimal) --- */
+  .margin-top-sm { margin-top: var(--spacing-sm); }
+  .margin-bottom-sm { margin-bottom: var(--spacing-sm); }
+  .margin-top-md { margin-top: var(--spacing-md); }
+  .margin-bottom-md { margin-bottom: var(--spacing-md); }
+  .text-bold { font-weight: bold; }
+  .text-accent { color: var(--color-accent); } /* Utility for accent text */

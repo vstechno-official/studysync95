@@ -1,0 +1,23 @@
+{
+  "name": "studysync95",
+  "version": "1.0.0",
+  "description": "A retro-themed study task manager for high schoolers.",
+  "main": "server.js",
+  "author": "https://github.com/vstechno-official",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.x.x",
+    "dotenv": "^16.x.x",
+    "ejs": "^3.x.x",
+    "express": "^4.x.x"
+  },
+  "devDependencies": {
+    "nodemon": "^3.x.x",
+    "prisma": "^5.x.x"
+  }
+}
